@@ -1,5 +1,5 @@
 -- ----------------------
--- DISPAADORES
+-- DISPARADORES
 -- ----------------------
 delimiter //
 drop trigger if exists ai_contiene//
@@ -38,6 +38,14 @@ begin
     call setMonto(new.id_calzado, new.id_venta);
 end//
 delimiter ;
+
+delimiter //
+drop trigger if exists ai_alimenta//
+create trigger ai_alimenta after insert on alimenta for each row
+begin
+	call addStock(new.cantidad, new.id_calzado);
+end//
+
 
 
 -- ----------------------
